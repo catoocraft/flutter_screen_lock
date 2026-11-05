@@ -30,7 +30,7 @@ class InputController {
   String get confirmedInput => _firstInput;
 
   /// Add some text at the end and stream it.
-  void addCharacter(String input) {
+  void addCharacter(String input) async {
     if (_currentInputs.length >= _digits) {
       return;
     }
@@ -40,6 +40,9 @@ class InputController {
 
     if (_digits != _currentInputs.length) {
       return;
+    } else {
+      // Wait for a moment to let the user see the final indicator filled.
+      await Future.delayed(const Duration(milliseconds: 300));
     }
 
     if (_correctString == null && _firstInput.isEmpty) {
